@@ -17,6 +17,11 @@ const Funcionario = sequelize.define(
             type: DataTypes.TEXT("long"),
             allowNull: false
         },
+        first_access: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
+            allowNull: false
+        },
         empresa_id: {
             type: DataTypes.INTEGER,
             allowNull: false,

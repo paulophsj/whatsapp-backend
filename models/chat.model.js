@@ -24,6 +24,11 @@ const Chat = sequelize.define(
             },
             onDelete: "CASCADE",
             onUpdate: "CASCADE"
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
+            allowNull: false
         }
     }
 )

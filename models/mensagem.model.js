@@ -3,7 +3,7 @@ import sequelize from "../config/db.config.js";
 
 const Mensagem = sequelize.define(
     "mensagem", {
-        enviado_por_funcionario: {
+        enviadoPorFuncionario: {
             type: DataTypes.BOOLEAN,
             allowNull: false
         },

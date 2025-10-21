@@ -7,7 +7,7 @@ const Cliente = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false
         },
-        numero_cliente: {
+        numeroCliente: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true
