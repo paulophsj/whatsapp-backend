@@ -2,6 +2,7 @@ import Role from "./role.model.js";
 import Chat from "./chat.model.js";
 import Empresa from "./empresa.model.js";
 import Cliente from "./cliente.model.js";
+import Session from "./session.model.js";
 import Mensagem from "./mensagem.model.js";
 import Funcionario from "./funcionario.model.js";
 
@@ -13,6 +14,7 @@ db.funcionario = Funcionario
 db.chat = Chat
 db.cliente = Cliente
 db.mensagem = Mensagem
+db.session = Session
 
 db.role.hasMany(db.empresa, {foreignKey: "role_id"})
 db.empresa.belongsTo(db.role, {foreignKey: "role_id"})
@@ -34,5 +36,8 @@ db.funcionario.belongsTo(db.role, {foreignKey: "role_id"})
 
 db.chat.hasMany(db.mensagem, {foreignKey: "chat_id"})
 db.mensagem.belongsTo(db.chat, {foreignKey: "chat_id"})
+
+db.empresa.hasOne(db.session, {foreignKey: "empresa_id"})
+db.session.belongsTo(db.empresa, {foreignKey: "empresa_id"})
 
 export default db
