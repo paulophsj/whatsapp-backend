@@ -10,7 +10,22 @@ const Cliente = sequelize.define(
         numeroCliente: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
+            unique: false // == Posso ter o mesmo cliente em outro Whatsapp ==
+        },
+        empresa_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: "empresa",
+                key: "id"
+            },
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE"
+        },
+        emAtendimento: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+            allowNull: false
         },
         role_id: {
             type: DataTypes.INTEGER,

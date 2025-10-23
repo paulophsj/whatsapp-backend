@@ -40,4 +40,7 @@ db.mensagem.belongsTo(db.chat, {foreignKey: "chat_id"})
 db.empresa.hasOne(db.session, {foreignKey: "empresa_id"})
 db.session.belongsTo(db.empresa, {foreignKey: "empresa_id"})
 
+db.empresa.hasMany(db.cliente, {foreignKey: "empresa_id"})
+db.cliente.belongsTo(db.funcionario, {foreignKey: "empresa_id"})
+
 export default db
