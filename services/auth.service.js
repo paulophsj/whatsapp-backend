@@ -46,7 +46,11 @@ export default {
         }
 
         const findFuncionarioByEmail = await Funcionario.findOne({
-            where: { email }
+            where: { email },
+            include: {
+                model: Empresa,
+                attributes: [["nome", "nomeEmpresa"]]
+            },
         })
 
         if (!findFuncionarioByEmail) {
@@ -74,7 +78,7 @@ export default {
             })
         }
 
-        const token = jwt.sign({ id: findFuncionarioByEmail.id, nome: findFuncionarioByEmail.nome, role: findFuncionarioByEmail.role_id }, process.env.JWT_SECRET)
+        const token = jwt.sign({ id: findFuncionarioByEmail.id, nome: findFuncionarioByEmail.nome, role: findFuncionarioByEmail.role_id, empresa_id: findFuncionarioByEmail.empresa_id, nomeEmpresa: findFuncionarioByEmail.empresa.dataValues.nomeEmpresa }, process.env.JWT_SECRET)
 
         return token
     }
