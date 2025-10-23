@@ -1,5 +1,6 @@
 import { create } from "@wppconnect-team/wppconnect"
 import { changeQR, changeStatus } from "./wpp.status.js"
+import wppEvents from "./wpp.events.js"
 
 const sessions = new Map()
 
@@ -15,8 +16,13 @@ export default {
                 puppeteerOptions: {
                     headless: true
                 },
-                autoClose: 0
+                autoClose: 0,
+                disableWelcome: true,
+                updatesLog: true,
+                logQR: true,
             })
+
+            session.onMessage(async (cliente) => await wppEvents.onMessage(cliente, empresa_id))
 
             sessions.set(nomeEmpresa, session)
         }
