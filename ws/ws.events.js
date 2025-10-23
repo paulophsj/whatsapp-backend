@@ -16,7 +16,7 @@ export async function enviarMensagemAoCliente(ws, chat_id, mensagem) {
         enviadoPorFuncionario: true,
         mensagem,
         chat_id
-    })w
+    })
 
     await wpp.getSession(ws.nomeEmpresa).sendText(cliente.numeroCliente, mensagem)
     
