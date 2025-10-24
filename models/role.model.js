@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.config.js";
 
-export const roles = ["admin", "empresa", "funcionario"]
+export const roles = ["admin", "empresa", "funcionario", "cliente"]
 
 const Role = sequelize.define(
     "role", 
