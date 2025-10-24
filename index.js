@@ -23,7 +23,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.use(cors({
-    allowedHeaders: ["Content-Type", "Auhtorization"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     origin: "http://localhost:3000"
 }))
@@ -35,7 +35,7 @@ app.use("/api/chat", authenticationMiddleware, roleMiddleware.canEmpresaAndFunci
 app.use("/api/session", authenticationMiddleware, roleMiddleware.canEmpresa, sessionRouter)
 
 try {
-  await sequelize.sync({alter: true})
+  await sequelize.sync({alter: false})
   await createRoles()
   console.log('Banco de dados conectado com sucesso!');
 } catch (error) {
