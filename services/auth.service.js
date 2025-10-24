@@ -78,6 +78,11 @@ export default {
             })
         }
 
+        // == Defineo status como logado ==
+        await findFuncionarioByEmail.update(
+            {isLogged: true}
+        )
+
         const token = jwt.sign({ id: findFuncionarioByEmail.id, nome: findFuncionarioByEmail.nome, role: findFuncionarioByEmail.role_id, empresa_id: findFuncionarioByEmail.empresa_id, nomeEmpresa: findFuncionarioByEmail.empresa.dataValues.nomeEmpresa }, process.env.JWT_SECRET)
 
         return token

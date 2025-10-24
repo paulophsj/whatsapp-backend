@@ -22,6 +22,11 @@ const Funcionario = sequelize.define(
             defaultValue: true,
             allowNull: false
         },
+        isLogged: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+            allowNull: false
+        },
         empresa_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
