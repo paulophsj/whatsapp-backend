@@ -81,5 +81,8 @@ export default {
         const token = jwt.sign({ id: findFuncionarioByEmail.id, nome: findFuncionarioByEmail.nome, role: findFuncionarioByEmail.role_id, empresa_id: findFuncionarioByEmail.empresa_id, nomeEmpresa: findFuncionarioByEmail.empresa.dataValues.nomeEmpresa }, process.env.JWT_SECRET)
 
         return token
+    },
+    checkAuth: async (token) => {
+        return jwt.verify(token, process.env.JWT_SECRET)
     }
 }
