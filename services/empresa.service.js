@@ -4,6 +4,7 @@ import bcryptUtil from "../utils/bcrypt.util.js"
 import nodemailerUtil from "../utils/nodemailer.util.js"
 import Empresa from "../models/empresa.model.js"
 import Funcionario from "../models/funcionario.model.js"
+import Chat from "../models/chat.model.js"
 import { validateEmail } from "../utils/regex.util.js"
 
 export default {
@@ -52,5 +53,29 @@ export default {
         nodemailerUtil.enviarEmailTexto(email, "Bem vindo ao nosso sistema!", `Sua senha de primeiro acesso é: ${randomPassword}`)
 
         return newFuncionario
+    },
+    listarFuncionarios: async (empresa_id) => {
+        const funcionarios = await Funcionario.findAll({
+            where: {empresa_id},
+            include: {
+                model: Chat,
+                attributes: [
+                    "id",
+                    "isActive",
+                    "createdAt",
+                    "updatedAt"
+                ]
+            },
+            attributes: [
+                "id",
+                "nome",
+                "email",
+                "isLogged",
+                "createdAt",
+                "updatedAt"
+            ]
+        })
+
+        return funcionarios
     }
 }
