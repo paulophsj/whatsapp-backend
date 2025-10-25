@@ -16,15 +16,10 @@ export default {
     listarFuncionarios: async (req,res) => {
         try {
             const {id: empresa_id} = req.user
-
             const funcionarios = await empresaService.listarFuncionarios(empresa_id)
-
-            setTimeout(() => {
-                return res.status(200).json(funcionarios)
-            }, 3000);
-
+            return res.status(200).json(funcionarios)
         } catch (error) {
-            
+            return res.status(500).json({message: "Erro interno do servidor"})
         }
     }
 }
