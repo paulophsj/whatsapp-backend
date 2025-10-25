@@ -11,6 +11,7 @@ import empresaRouter from "./routers/empresa.router.js"
 import adminRouter from "./routers/admin.router.js"
 import chatRouter from "./routers/chat.router.js"
 import sessionRouter from "./routers/session.router.js"
+import mensagemRouter from "./routers/mensagem.router.js"
 
 import { authenticationMiddleware } from "./middlewares/authentication.middleware.js";
 import roleMiddleware from "./middlewares/role.middleware.js";
@@ -33,6 +34,7 @@ app.use("/api/auth", authRouter)
 app.use("/api/empresa", authenticationMiddleware, roleMiddleware.canEmpresa, empresaRouter)
 app.use("/api/chat", authenticationMiddleware, roleMiddleware.canEmpresaAndFuncionario, chatRouter)
 app.use("/api/session", authenticationMiddleware, roleMiddleware.canEmpresa, sessionRouter)
+app.use("/api/mensagem", authenticationMiddleware, roleMiddleware.canEmpresaAndFuncionario, mensagemRouter)
 
 try {
   await sequelize.sync({alter: false})
