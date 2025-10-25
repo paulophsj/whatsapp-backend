@@ -4,6 +4,7 @@ import chatController from "../controllers/chat.controller.js";
 
 const router = Router()
 
+router.get("/actives", roleMiddleware.canFuncionario, chatController.findAllActiveChats)
 router.post("/create", roleMiddleware.canFuncionario, chatController.criarChat)
 
 export default router

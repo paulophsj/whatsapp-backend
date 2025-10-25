@@ -1,5 +1,6 @@
 import Chat from "../models/chat.model.js"
 import Cliente from "../models/cliente.model.js"
+import Funcionario from "../models/funcionario.model.js"
 import { validatePhone } from "../utils/regex.util.js"
 
 export default {
@@ -27,5 +28,12 @@ export default {
         }
 
         return chat
+    },
+    findAllActiveChats: async (funcionario_id) => {
+        const chats = await Chat.findAll({
+            where: {funcionario_id, isActive: true}
+        })
+
+        return chats
     }
 }
