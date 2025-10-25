@@ -23,5 +23,12 @@ export default {
         }
 
         return session
+    },
+    verificarSessao: async (empresa_id) => {
+        const session = await Session.findOne({where: {empresa_id}})
+        if(!session){
+            throw {status: 400, message: "Sessão não encontrada"}
+        }
+        return session.isActive
     }
 }

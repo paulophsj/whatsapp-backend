@@ -5,5 +5,6 @@ const router = Router()
 
 router.post("/create", sessionController.criarSession)
 router.get("/iniciar", sessionController.iniciarSessao)
+router.get("/verificar", sessionController.verificarSessao)
 
 export default router
