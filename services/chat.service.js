@@ -27,13 +27,28 @@ export default {
             throw {status: 400, message: "Este cliente já possui um chat ativo."}
         }
 
+        cliente.update({
+            emAtendimento: true
+        })
+
         return chat
     },
     findAllActiveChats: async (funcionario_id) => {
         const chats = await Chat.findAll({
-            where: {funcionario_id, isActive: true}
+            include: {
+                model: Cliente,
+            },
+            where: {funcionario_id, isActive: true},
+            attributes: ["id", "createdAt", "updatedAt", "isActive"]
         })
 
         return chats
+    },
+    todosClientesSemAtendimento: async (empresa_id) => {
+        const clientes = await Cliente.findAll({
+            where: {empresa_id, emAtendimento: false}
+        })
+
+        return clientes
     }
 }

@@ -5,7 +5,7 @@ const Chat = sequelize.define(
     "chat", {
         funcionario_id: {
             type: DataTypes.INTEGER,
-            unique: true,
+            unique: false,
             allowNull: false,
             references: {
                 model: "funcionario",
@@ -16,10 +16,10 @@ const Chat = sequelize.define(
         },
         cliente_id: {
             type: DataTypes.INTEGER,
-            unique: true,
+            unique: false,
             allowNull: false,
             references: {
-                model: "chat",
+                model: "cliente",
                 key: "id"
             },
             onDelete: "CASCADE",

@@ -1,6 +1,5 @@
 import { WebSocketServer } from "ws";
 import jwt from "jsonwebtoken"
-import Chat from "../models/chat.model.js";
 import { enviarMensagemAoCliente } from "./ws.events.js";
 
 const wss = new WebSocketServer({ port: 8081 })
@@ -14,7 +13,7 @@ wss.on('connection', async (ws, req) => {
 
     const decode = jwt.verify(token, process.env.JWT_SECRET)
 
-    if(!decode){
+    if(!decode || decode?.role !== 3){
         ws.close()
     }
 
