@@ -1,6 +1,7 @@
 import Cliente from "../models/cliente.model.js"
 import Chat from "../models/chat.model.js"
 import Mensagem from "../models/mensagem.model.js"
+import estatisticasService from "../services/estatisticas.service.js"
 import { MessageTypes } from "../utils/messageType.util.js"
 
 import wss from "../ws/ws.js"
@@ -47,13 +48,15 @@ export default {
             console.log("Aguarde que em instantes você será atendido.")
         }
         else {
-            const chat = await Chat.findOne({ where: { cliente_id: clientedb.id } })
+            const chat = await Chat.findOne({ where: { cliente_id: clientedb.id, isActive: true } })
 
             const novaMensagem = await Mensagem.create({
                 enviadoPorFuncionario: false,
                 mensagem,
                 chat_id: chat.id
             })
+
+            await estatisticasService.createEstatisticas(chat.id, false)
             
             sendToOne(JSON.stringify(novaMensagem.dataValues), chat.funcionario_id, MessageTypes.ENVIO_MENSAGEM)
         }

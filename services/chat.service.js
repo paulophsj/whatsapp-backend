@@ -1,6 +1,6 @@
 import Chat from "../models/chat.model.js"
 import Cliente from "../models/cliente.model.js"
-import Funcionario from "../models/funcionario.model.js"
+import Estatisticas from "../models/estatisticas.model.js"
 import { validatePhone } from "../utils/regex.util.js"
 
 export default {
@@ -26,6 +26,11 @@ export default {
         if(!created){
             throw {status: 400, message: "Este cliente já possui um chat ativo."}
         }
+
+        await Estatisticas.findOrCreate({
+            where: {chat_id: chat.id},
+            defaults: {chat_id: chat.id}
+        })
 
         cliente.update({
             emAtendimento: true
