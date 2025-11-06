@@ -20,6 +20,16 @@ const Estatisticas = sequelize.define(
         tempoMedioFuncionario: {
             type: DataTypes.DOUBLE,
             allowNull: true
+        },
+        mensagensRecebidas: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0,
+            allowNull: true
+        },
+        mensagensEnviadas: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0,
+            allowNull: true
         }
     }
 )

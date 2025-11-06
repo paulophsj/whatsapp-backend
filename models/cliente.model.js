@@ -37,6 +37,11 @@ const Cliente = sequelize.define(
             },
             onDelete: "CASCADE",
             onUpdate: "CASCADE"
+        },
+        ativo: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true,
         }
     }
 )
