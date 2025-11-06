@@ -22,6 +22,7 @@ export async function enviarMensagemAoCliente(ws, chat_id, mensagem) {
     })
 
     await estatisticasService.createEstatisticas(chat_id, true)
+    await estatisticasService.updateMensagensEnviadasRecebidas(chat_id, 1, false)
 
     sendToOne(JSON.stringify(novaMensagem.dataValues), ws.funcionario_id, MessageTypes.ENVIO_MENSAGEM)
 
