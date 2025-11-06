@@ -4,7 +4,7 @@ import sequelize from "../config/db.config.js";
 const Anotacoes = sequelize.define(
     "anotacoes", {
     mensagem: {
-        type: DataTypes.TEXT("long"),
+        type: DataTypes.STRING(200),
         allowNull: false
     },
     funcionario_id: {

@@ -8,7 +8,7 @@ const Mensagem = sequelize.define(
             allowNull: false
         },
         mensagem: {
-            type: DataTypes.TEXT("long"),
+            type: DataTypes.STRING(500),
             allowNull: false
         },
         chat_id: {
