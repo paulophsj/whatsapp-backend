@@ -46,6 +46,9 @@ export default {
 
         if (!clientedb.emAtendimento) {
             console.log("Aguarde que em instantes você será atendido.")
+            await clientedb.update({
+                ativo: true
+            })
         }
         else {
             const chat = await Chat.findOne({ where: { cliente_id: clientedb.id, isActive: true } })
@@ -57,12 +60,13 @@ export default {
             })
 
             await estatisticasService.createEstatisticas(chat.id, false)
+            await estatisticasService.updateMensagensEnviadasRecebidas(chat.id, 1, true)
             
             sendToOne(JSON.stringify(novaMensagem.dataValues), chat.funcionario_id, MessageTypes.ENVIO_MENSAGEM)
         }
 
         const findAllInactiveClients = await Cliente.findAll({
-            where: { empresa_id, emAtendimento: false },
+            where: { empresa_id, emAtendimento: false, ativo: true },
             attributes: ["id", "nome", "numeroCliente", "emAtendimento"]
         })
 
