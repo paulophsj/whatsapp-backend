@@ -6,6 +6,7 @@ import Session from "./session.model.js";
 import Mensagem from "./mensagem.model.js";
 import Anotacoes from "./anotacoes.model.js";
 import Funcionario from "./funcionario.model.js";
+import Predefinidas from "./predefinidas.model.js";
 import Estatisticas from "./estatisticas.model.js";
 
 const db = {}
@@ -19,6 +20,7 @@ db.mensagem = Mensagem
 db.session = Session
 db.anotacoes = Anotacoes
 db.estatisticas = Estatisticas
+db.predefinidas = Predefinidas
 
 db.role.hasMany(db.empresa, {foreignKey: "role_id"})
 db.empresa.belongsTo(db.role, {foreignKey: "role_id"})
@@ -55,5 +57,8 @@ db.anotacoes.belongsTo(db.cliente, {foreignKey: "cliente_id"})
 
 db.chat.hasMany(db.estatisticas, {foreignKey: "chat_id"})
 db.estatisticas.belongsTo(db.chat, {foreignKey: "chat_id"})
+
+db.funcionario.hasMany(db.predefinidas, {foreignKey: "funcionario_id"})
+db.predefinidas.belongsTo(db.funcionario, {foreignKey: "funcionario_id"})
 
 export default db
