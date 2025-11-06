@@ -30,5 +30,26 @@ export default {
         } catch (error) {
             return res.status(error.status || 500).json({message: error.message || "Erro interno do servidor."})
         }
+    },
+    buscarChatsFinalizados: async (req,res) => {
+        try {
+            const {id: funcionario_id} = req.user
+            const chatsFinalizados = await chatService.buscarChatsFinalizados(funcionario_id)
+            return res.status(200).json(chatsFinalizados)
+        } catch (error) {
+            return res.status(error.status || 500).json({message: error.message || "Erro interno do servidor."})
+        }
+    },
+    finalizarChat: async (req,res) => {
+        try {
+            const {id: funcionario_id} = req.user
+            const {id: chat_id} = req.params
+
+            await chatService.finalizarChat(chat_id, funcionario_id)
+            
+            return res.status(200).json({message: "Chat finalizado com sucesso!"})
+        } catch (error) {
+            return res.status(error.status || 500).json({message: error.message || "Erro interno do servidor."})
+        }
     }
 }
