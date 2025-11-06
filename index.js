@@ -14,6 +14,7 @@ import sessionRouter from "./routers/session.router.js"
 import mensagemRouter from "./routers/mensagem.router.js"
 import anotacoesRouter from "./routers/anotacoes.router.js"
 import estatisticasRouter from "./routers/estatisticas.router.js"
+import predefinidasRouter from "./routers/predefinidas.router.js"
 
 import { authenticationMiddleware } from "./middlewares/authentication.middleware.js";
 import roleMiddleware from "./middlewares/role.middleware.js";
@@ -39,6 +40,7 @@ app.use("/api/session", authenticationMiddleware, roleMiddleware.canEmpresa, ses
 app.use("/api/mensagem", authenticationMiddleware, roleMiddleware.canEmpresaAndFuncionario, mensagemRouter)
 app.use("/api/anotacoes", authenticationMiddleware, roleMiddleware.canEmpresaAndFuncionario, anotacoesRouter)
 app.use("/api/estatisticas", authenticationMiddleware, roleMiddleware.canEmpresaAndFuncionario, estatisticasRouter)
+app.use("/api/predefinidas", authenticationMiddleware, roleMiddleware.canFuncionario, predefinidasRouter)
 
 try {
   await sequelize.sync({alter: false})
